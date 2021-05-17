@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th = "http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+	
+	<!--  반복문  :  th:each = "변수 : ${목록} "  
+	ol : 번호를 매긴 목록(숫자), ul: 순서없이 모양으로 만든 목록(점) unordered list
+	li 태그 : list의 약자로 목록을 만드는 태그 -->
+	<!-- <ul>
+		<li th:each="dto : ${list}">
+			[[${dto}]]
+		</li>
+	</ul> -->
+	<!-- <ul>
+		<li th:each="dto, status : ${list}" th:if="${dto.sno % 5 == 0 }">
+			[[${dto}]]
+		</li>
+	</ul>  -->
+	
+	<!-- 타임리프는 else if 같이 사용못하고 단독으로 사용해야됨. 삼항연산자는 가능  -->
+	<!-- <ul>
+		<li th:each="dto, state : ${list}">
+			<span th:if="${dto.sno % 5 == 0}"  th:text="${'-------'+dto.sno}"></span>
+			<span th:unless ="${dto.sno % 5 == 0 }"  th:text= "${dto.first}"></span>
+		</li>
+	</ul> -->
+	
+	<!-- <ul>
+		<li th:each="dto, state : ${list}"  th:text="${dto.sno % 5 == 0}? ${dto.sno} : ${dto.first}">
+		</li>
+	</ul> -->
+	
+	<style>
+		.target {
+			background-color : red;
+		}
+	</style>
+	
+	<!-- <ul>
+		<li th:each = "dto, state : ${list}"  th:class="${dto.sno % 5 == 0 }? 'target'"  
+		th:text="${dto}">
+		</li>
+	</ul>	 -->
+	
+	<ul>
+		<th:block th:each="dto: ${list}">
+			<li>
+				<a th:href ="@{'/ex4/' + ${dto.sno} (first = ${dto.sno})} ">[[${dto}]]</a>
+				<h3 th:text="${#temporals.format(dto.regTime, 'yyyy/MM/dd')}"></h3>
+			</li>
+		</th:block>
+	</ul>
+</body>
+</html>
